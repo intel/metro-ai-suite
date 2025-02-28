@@ -3,8 +3,9 @@
 
 1. Modify the `HOST_IP` variable in the `.env` file to your actual host IP address.
 2. Modify the "Case" variable in the '.env' file to the actual use case(eg. Smart_Parking/Smart_Tolling).
-2. Execute the `update_dashboard.sh` script.
-3. These 2 steps need to be done for the first time setup and whenever a new commit is pulled.
+3. Execute the `update_dashboard.sh` script.
+4. Execute the 'install.sh' script
+5. These 4 steps need to be done for the first time setup and whenever a new commit is pulled.
 
 ## Deployment
 

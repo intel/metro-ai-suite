@@ -2,6 +2,32 @@
 set -e  # Exit on error
 
 ##############################################################################
+# Helper function: create_dir
+# Attempts to create a directory; if it fails due to permission issues,
+# changes the ownership of the parent directory and then creates the folder.
+##############################################################################
+create_dir() {
+    local dir="$1"
+    if ! mkdir -p "$dir" 2>/dev/null; then
+        echo "Failed to create '$dir'. It may be owned by root. Attempting to fix ownership..."
+        # Change ownership of the parent directory
+        sudo chown -R "$(id -un):$(id -gn)" "$(dirname "$dir")" || true
+        mkdir -p "$dir"
+    fi
+    # Ensure the created directory is owned by the current user
+    chown -R "$(id -un):$(id -gn)" "$dir" || true
+}
+
+##############################################################################
+# 0. Check for python3.12-venv (only place we use sudo)
+##############################################################################
+if ! dpkg -s python3.12-venv &>/dev/null; then
+    echo "Package python3.12-venv not installed. Attempting to install..."
+    sudo apt update
+    sudo apt install -y python3.12-venv
+fi
+
+##############################################################################
 # 1. Source the .env file to get CASE (or other environment variables).
 #    Make sure .env contains a line like: Case="Smart_Tolling"
 ##############################################################################
@@ -12,7 +38,6 @@ fi
 # shellcheck disable=SC1091
 source .env
 
-# The environment variable must be named `Case` inside .env
 if [ -z "$Case" ]; then
     echo "Error: 'Case' variable not found in .env!"
     exit 1
@@ -26,23 +51,23 @@ echo "Detected Case: $Case"
 VENV_DIR="$HOME/ri2-venv"  # or pick another name/path if you wish
 
 if [ ! -d "$VENV_DIR" ]; then
-    echo "Creating Python virtual environment at $VENV_DIR ..."
+    echo "Virtual environment not found. Creating Python virtual environment at $VENV_DIR ..."
     python3 -m venv "$VENV_DIR"
+fi
+
+if [ ! -f "$VENV_DIR/bin/activate" ]; then
+    echo "Error: Virtual environment activate script not found at $VENV_DIR/bin/activate"
+    exit 1
 fi
 
 echo "Activating Python virtual environment..."
 # shellcheck disable=SC1090
 source "$VENV_DIR/bin/activate"
 
-# Upgrade pip to ensure smooth installs
 pip install --upgrade pip
 
 ##############################################################################
 # 3. Locate and parse the model.txt
-#    Expecting lines like:
-#      yolov10s yolo
-#      license-plate-recognition-barrier-0007 omz
-#      vehicle-attributes-recognition-barrier-0039 omz
 ##############################################################################
 MODEL_TXT="usecase/${Case}/model.txt"
 
@@ -56,9 +81,7 @@ YOLO_MODEL=""
 OMZ_MODELS=()
 
 while read -r line; do
-    # Skip empty lines or comments
     [[ -z "$line" || "$line" =~ ^# ]] && continue
-
     MODEL_NAME=$(echo "$line" | awk '{print $1}')
     MODEL_TYPE=$(echo "$line" | awk '{print $2}')
 
@@ -78,19 +101,15 @@ echo "Found OMZ models: ${OMZ_MODELS[@]}"
 if [ -n "$YOLO_MODEL" ]; then
     echo ">>> Processing YOLO model: $YOLO_MODEL"
 
-    # Install YOLO and OpenVINO for the conversion
     pip install ultralytics==8.3.50 openvino==2025.0.0
 
-    # By default, yolo export expects <model_name>.pt to be in the current dir
     if [ ! -f "${YOLO_MODEL}.pt" ]; then
         echo "Warning: ${YOLO_MODEL}.pt not found in current directory. If not local, ultralytics will try to download."
     fi
 
-    # Export YOLO model to OpenVINO format
     echo "Exporting ${YOLO_MODEL} to OpenVINO..."
     yolo export model="${YOLO_MODEL}.pt" format=openvino
 
-    # The export typically creates a folder <model_name>_openvino_model
     EXPORTED_DIR="${YOLO_MODEL}_openvino_model"
     if [ ! -d "$EXPORTED_DIR" ]; then
         echo "Error: Expected folder $EXPORTED_DIR not found after export!"
@@ -98,15 +117,12 @@ if [ -n "$YOLO_MODEL" ]; then
         exit 1
     fi
 
-    # Remove old folder in evam/models/public if it exists, then move the new folder
     if [ -d "evam/models/public/${YOLO_MODEL}" ]; then
         rm -rf "evam/models/public/${YOLO_MODEL}"
     fi
-    mkdir -p evam/models/public
+    create_dir "evam/models/public"
     mv "$EXPORTED_DIR" "evam/models/public/${YOLO_MODEL}"
 
-    # ------------------------------------------------------------------------
-    # Attempt the sed update on the model XML file (line 11172 => YOLO => yolo_v10)
     XML_FILE="evam/models/public/${YOLO_MODEL}/${YOLO_MODEL}.xml"
     if [ -f "$XML_FILE" ]; then
         sed -i '11172s/YOLO/yolo_v10/' "$XML_FILE" || true
@@ -114,26 +130,21 @@ if [ -n "$YOLO_MODEL" ]; then
     else
         echo "Warning: XML file not found for ${YOLO_MODEL}"
     fi
-    # ------------------------------------------------------------------------
 
-    # Create a FP32 subfolder inside the YOLO model folder
-    mkdir -p "evam/models/public/${YOLO_MODEL}/FP32"
+    create_dir "evam/models/public/${YOLO_MODEL}/FP32"
 
-    # If the .pt file exists, move it to FP32
     if [ -f "${YOLO_MODEL}.pt" ]; then
         mv "${YOLO_MODEL}.pt" "evam/models/public/${YOLO_MODEL}/FP32/"
     fi
 
-    # Move the bin, xml, yaml into the FP32 folder (if they exist)
     mv "evam/models/public/${YOLO_MODEL}/${YOLO_MODEL}.xml" "evam/models/public/${YOLO_MODEL}/FP32/" 2>/dev/null || true
     mv "evam/models/public/${YOLO_MODEL}/${YOLO_MODEL}.bin" "evam/models/public/${YOLO_MODEL}/FP32/" 2>/dev/null || true
     mv "evam/models/public/${YOLO_MODEL}/"*.yaml "evam/models/public/${YOLO_MODEL}/FP32/" 2>/dev/null || true
 
-    # Finally, move everything to usecase/${Case}/evam/models/public
     if [ -d "usecase/${Case}/evam/models/public/${YOLO_MODEL}" ]; then
         rm -rf "usecase/${Case}/evam/models/public/${YOLO_MODEL}"
     fi
-    mkdir -p "usecase/${Case}/evam/models/public"
+    create_dir "usecase/${Case}/evam/models/public"
     mv "evam/models/public/${YOLO_MODEL}" "usecase/${Case}/evam/models/public/"
 fi
 
@@ -143,39 +154,33 @@ fi
 if [ ${#OMZ_MODELS[@]} -gt 0 ]; then
     echo ">>> Processing OMZ models: ${OMZ_MODELS[@]}"
 
-    # We will reuse the same venv, so just ensure we have openvino-dev
     pip install "openvino-dev[onnx,tensorflow,pytorch]"
 
-    # Clone DL Streamer if not already present
     if [ ! -d "dlstreamer" ]; then
         git clone https://github.com/dlstreamer/dlstreamer.git
     else
         echo "dlstreamer directory already exists. Skipping clone."
     fi
 
-    # Prepare to download models
     export MODELS_PATH="$HOME/intel/models"
-    mkdir -p "$MODELS_PATH"
+    create_dir "$MODELS_PATH"
 
     pushd dlstreamer/samples > /dev/null
 
-    # Overwrite models_omz_samples.lst with only the OMZ models from model.txt
     echo "Overwriting models_omz_samples.lst with OMZ models..."
     > models_omz_samples.lst
     for model in "${OMZ_MODELS[@]}"; do
         echo "$model" >> models_omz_samples.lst
     done
 
-    # Download models
     echo "Downloading OMZ models..."
     ./download_omz_models.sh
 
     popd > /dev/null
 
-    # Merge 'public' into 'intel' (if public exists)
     if [ -d "$HOME/intel/models/public" ]; then
         echo "Merging public models into intel folder..."
-        mkdir -p "$HOME/intel/models/intel"
+        create_dir "$HOME/intel/models/intel"
         for item in "$HOME/intel/models/public/"*; do
             base_item=$(basename "$item")
             target="$HOME/intel/models/intel/$base_item"
@@ -188,8 +193,7 @@ if [ ${#OMZ_MODELS[@]} -gt 0 ]; then
         rm -rf "$HOME/intel/models/public"
     fi
 
-    # Move the final models directly into usecase/<Case>/evam/models/intel/ (flattening the structure)
-    mkdir -p "usecase/${Case}/evam/models/intel"
+    create_dir "usecase/${Case}/evam/models/intel"
     if [ -d "$HOME/intel/models/intel" ]; then
         for item in "$HOME/intel/models/intel/"*; do
             base_item=$(basename "$item")
@@ -205,12 +209,10 @@ if [ ${#OMZ_MODELS[@]} -gt 0 ]; then
         echo "Warning: $HOME/intel/models/intel not found. Download may have failed."
     fi
 
-    # Download model_proc JSON files from DL Streamer GitHub for each OMZ model
     for model in "${OMZ_MODELS[@]}"; do
         MODEL_PROC_URL="https://github.com/dlstreamer/dlstreamer/blob/master/samples/gstreamer/model_proc/intel/${model}.json?raw=true"
         DEST_DIR="usecase/${Case}/evam/models/intel/${model}"
-        mkdir -p "$DEST_DIR"
-
+        create_dir "$DEST_DIR"
         echo "Downloading model proc for ${model}..."
         curl -L -o "${DEST_DIR}/${model}.json" "${MODEL_PROC_URL}" || \
             echo "Warning: Could not download model proc for ${model}"
@@ -218,8 +220,15 @@ if [ ${#OMZ_MODELS[@]} -gt 0 ]; then
 fi
 
 ##############################################################################
-# 6. Remove the dlstreamer, evam folder (if it exists), deactivate the virtual env
-#    and finish
+# 6. (Optional) Ensure current user owns everything under usecase/${Case}
+##############################################################################
+CURRENT_USER=$(id -un)
+CURRENT_GROUP=$(id -gn)
+echo "Fixing ownership for usecase/${Case}..."
+chown -R "$CURRENT_USER:$CURRENT_GROUP" "usecase/${Case}" 2>/dev/null || true
+
+##############################################################################
+# 7. Remove the dlstreamer and evam folders (if they exist), deactivate the venv, and finish
 ##############################################################################
 if [ -d "dlstreamer" ]; then
     echo "Removing dlstreamer folder..."

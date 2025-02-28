@@ -9,7 +9,7 @@ curl http://localhost:8080/pipelines/user_defined_pipelines/car_plate_recognitio
     "destination": {
         "metadata": {
             "type": "mqtt",
-            "host": "10.3.233.175:1883", 
+            "host": "172.31.233.38:1883", 
             "topic": "object_detection_1",
             "timeout": 1000
         },

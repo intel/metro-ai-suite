@@ -70,7 +70,7 @@
       "timeFrom": "now-1d",
       "title": "WebRTC Stream",
       "type": "ryantxu-ajax-panel",
-      "url": "http://10.3.233.175:8082/?destination_peer_id=object_detection_8",
+      "url": "http://172.31.233.38:8082/?destination_peer_id=object_detection_8",
       "withCredentials": false
     },
     {

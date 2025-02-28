@@ -55,7 +55,7 @@
       "links": [
         {
           "title": "Details",
-          "url": "http://10.3.233.175:3000/d/be2er9dbe8a9sd/zone-1-lane-1?orgId=1"
+          "url": "http://172.31.233.38:3000/d/be2er9dbe8a9sd/zone-1-lane-1?orgId=1"
         }
       ],
       "method": "iframe",
@@ -95,7 +95,7 @@
       "timeFrom": "now-1d",
       "title": "WebRTC Stream",
       "type": "ryantxu-ajax-panel",
-      "url": "http://10.3.233.175:8082/?destination_peer_id=object_detection_1",
+      "url": "http://172.31.233.38:8082/?destination_peer_id=object_detection_1",
       "withCredentials": false
     },
     {
@@ -114,7 +114,7 @@
       "links": [
         {
           "title": "Details",
-          "url": "http://10.3.233.175:3000/d/aecxdm402t1q8a/zone-1-lane-2?orgId=1"
+          "url": "http://172.31.233.38:3000/d/aecxdm402t1q8a/zone-1-lane-2?orgId=1"
         }
       ],
       "method": "iframe",
@@ -154,7 +154,7 @@
       "timeFrom": "now-1d",
       "title": "WebRTC Stream",
       "type": "ryantxu-ajax-panel",
-      "url": "http://10.3.233.175:8082/?destination_peer_id=object_detection_2",
+      "url": "http://172.31.233.38:8082/?destination_peer_id=object_detection_2",
       "withCredentials": false
     },
     {
@@ -173,7 +173,7 @@
       "links": [
         {
           "title": "Details",
-          "url": "http://10.3.233.175:3000/d/cecxe4agf3caoe/zone-1-lane-3?orgId=1"
+          "url": "http://172.31.233.38:3000/d/cecxe4agf3caoe/zone-1-lane-3?orgId=1"
         }
       ],
       "method": "iframe",
@@ -213,7 +213,7 @@
       "timeFrom": "now-1d",
       "title": "WebRTC Stream",
       "type": "ryantxu-ajax-panel",
-      "url": "http://10.3.233.175:8082/?destination_peer_id=object_detection_3",
+      "url": "http://172.31.233.38:8082/?destination_peer_id=object_detection_3",
       "withCredentials": false
     },
     {
@@ -232,7 +232,7 @@
       "links": [
         {
           "title": "Details",
-          "url": "http://10.3.233.175:3000/d/fecxe786edr0ge/zone-1-lane-4?orgId=1"
+          "url": "http://172.31.233.38:3000/d/fecxe786edr0ge/zone-1-lane-4?orgId=1"
         }
       ],
       "method": "iframe",
@@ -272,7 +272,7 @@
       "timeFrom": "now-1d",
       "title": "WebRTC Stream",
       "type": "ryantxu-ajax-panel",
-      "url": "http://10.3.233.175:8082/?destination_peer_id=object_detection_4",
+      "url": "http://172.31.233.38:8082/?destination_peer_id=object_detection_4",
       "withCredentials": false
     },
     {
@@ -304,7 +304,7 @@
       "links": [
         {
           "title": "Details",
-          "url": "http://10.3.233.175:3000/d/eecxe9dpexfr4d/zone-2-lane-1?orgId=1"
+          "url": "http://172.31.233.38:3000/d/eecxe9dpexfr4d/zone-2-lane-1?orgId=1"
         }
       ],
       "method": "iframe",
@@ -344,7 +344,7 @@
       "timeFrom": "now-1d",
       "title": "WebRTC Stream",
       "type": "ryantxu-ajax-panel",
-      "url": "http://10.3.233.175:8082/?destination_peer_id=object_detection_5",
+      "url": "http://172.31.233.38:8082/?destination_peer_id=object_detection_5",
       "withCredentials": false
     },
     {
@@ -363,7 +363,7 @@
       "links": [
         {
           "title": "Details",
-          "url": "http://10.3.233.175:3000/d/becxeb2d25xq8c/zone-2-lane-2?orgId=1"
+          "url": "http://172.31.233.38:3000/d/becxeb2d25xq8c/zone-2-lane-2?orgId=1"
         }
       ],
       "method": "iframe",
@@ -403,7 +403,7 @@
       "timeFrom": "now-1d",
       "title": "WebRTC Stream",
       "type": "ryantxu-ajax-panel",
-      "url": "http://10.3.233.175:8082/?destination_peer_id=object_detection_6",
+      "url": "http://172.31.233.38:8082/?destination_peer_id=object_detection_6",
       "withCredentials": false
     },
     {
@@ -422,7 +422,7 @@
       "links": [
         {
           "title": "Details",
-          "url": "http://10.3.233.175:3000/d/fecxectr9w6wwe/zone-2-lane-3?orgId=1"
+          "url": "http://172.31.233.38:3000/d/fecxectr9w6wwe/zone-2-lane-3?orgId=1"
         }
       ],
       "method": "iframe",
@@ -462,7 +462,7 @@
       "timeFrom": "now-1d",
       "title": "WebRTC Stream",
       "type": "ryantxu-ajax-panel",
-      "url": "http://10.3.233.175:8082/?destination_peer_id=object_detection_7",
+      "url": "http://172.31.233.38:8082/?destination_peer_id=object_detection_7",
       "withCredentials": false
     },
     {
@@ -481,7 +481,7 @@
       "links": [
         {
           "title": "Details",
-          "url": "http://10.3.233.175:3000/d/decxee1kbadxcd/zone-2-lane-4?orgId=1"
+          "url": "http://172.31.233.38:3000/d/decxee1kbadxcd/zone-2-lane-4?orgId=1"
         }
       ],
       "method": "iframe",
@@ -521,7 +521,7 @@
       "timeFrom": "now-1d",
       "title": "WebRTC Stream",
       "type": "ryantxu-ajax-panel",
-      "url": "http://10.3.233.175:8082/?destination_peer_id=object_detection_8",
+      "url": "http://172.31.233.38:8082/?destination_peer_id=object_detection_8",
       "withCredentials": false
     },
     {
