@@ -119,7 +119,7 @@ services:
       - "8083:8083"
 
   webrtc-signaling-server:
-    image: amr-registry.caas.intel.com/nex-microservices/intel/simple-signaling-server:4.0.3
+    image: intel/simple-signaling-server:4.0.3
     container_name: webrtc-signaling-server
     read_only: true
     environment:
