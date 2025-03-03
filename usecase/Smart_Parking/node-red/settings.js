@@ -230,7 +230,7 @@ module.exports = {
      * to move httpAdminRoot
      */
     //httpStatic: '/home/nol/node-red-static/', //single static source
-    httpStatic: 'data/public/', 
+    httpStatic: '/data/public/', 
     /**
      *  OR multiple static sources can be created using an array of objects...
      *  Each object can also contain an options object for further configuration.
