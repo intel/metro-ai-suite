@@ -9,7 +9,7 @@ usecase/*/node-red/package.json
 usecase/*/node-red/package-lock.json
 usecase/*/node-red/flows_template.json
 usecase/*/node-red/.config.*.json
-usecase/*/node-red/public/images/
+#usecase/*/node-red/public/images/
 usecase/*/node-red/public/user_configuration_backup/
 usecase/*/node-red/*-template.json
 

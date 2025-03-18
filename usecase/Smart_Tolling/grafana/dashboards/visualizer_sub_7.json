@@ -70,7 +70,7 @@
       "timeFrom": "now-1d",
       "title": "WebRTC Stream",
       "type": "ryantxu-ajax-panel",
-      "url": "http://172.31.233.38:8082/?destination_peer_id=object_detection_7",
+      "url": "http://10.3.233.166:8082/?destination_peer_id=object_detection_7",
       "withCredentials": false
     },
     {
@@ -151,7 +151,7 @@
           "id": "partitionByValues",
           "options": {
             "fields": [
-              "Region 1"
+              "Region 2_3 1"
             ],
             "keepFields": true,
             "naming": {
@@ -162,7 +162,7 @@
         {
           "id": "joinByLabels",
           "options": {
-            "value": "Region 1"
+            "value": "Region 2_3 1"
           }
         },
         {
@@ -176,8 +176,6 @@
           "options": {
             "include": {
               "names": [
-                "Zone ID",
-                "Lane ID",
                 "Entry Time",
                 "Type",
                 "Color"
@@ -191,11 +189,9 @@
             "excludeByName": {},
             "includeByName": {},
             "indexByName": {
-              "Color": 3,
-              "Entry Time": 4,
-              "Lane ID": 1,
-              "Type": 2,
-              "Zone ID": 0
+              "Color": 1,
+              "Entry Time": 2,
+              "Type": 0
             },
             "renameByName": {}
           }
@@ -208,13 +204,13 @@
                 "config": {
                   "id": "equal",
                   "options": {
-                    "value": "Empty"
+                    "value": ""
                   }
                 },
-                "fieldName": "Status"
+                "fieldName": "Type"
               }
             ],
-            "match": "all",
+            "match": "any",
             "type": "exclude"
           }
         },
@@ -224,10 +220,12 @@
             "filters": [
               {
                 "config": {
-                  "id": "isNull",
-                  "options": {}
+                  "id": "equal",
+                  "options": {
+                    "value": null
+                  }
                 },
-                "fieldName": "Entry Time"
+                "fieldName": "Type"
               }
             ],
             "match": "any",

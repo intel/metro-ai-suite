@@ -12,4 +12,4 @@ datasources:
     access: proxy
     readOnly: false
     editable: true
-    jsonData: { "uri": "tcp://10.3.233.175:1883" }
+    jsonData: { "uri": "tcp://10.3.233.166:1883" }

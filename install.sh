@@ -70,6 +70,9 @@ pip install --upgrade pip
 # 3. Locate and parse the model.txt
 ##############################################################################
 MODEL_TXT="usecase/${Case}/model.txt"
+cat "$MODEL_TXT"
+
+
 
 if [ ! -f "$MODEL_TXT" ]; then
     echo "Error: $MODEL_TXT not found!"
@@ -80,17 +83,17 @@ fi
 YOLO_MODEL=""
 OMZ_MODELS=()
 
-while read -r line; do
-    [[ -z "$line" || "$line" =~ ^# ]] && continue
-    MODEL_NAME=$(echo "$line" | awk '{print $1}')
-    MODEL_TYPE=$(echo "$line" | awk '{print $2}')
+while read -r model_name model_type; do
+    # Skip empty lines or those starting with '#'
+    [[ -z "$model_name" || "$model_name" == \#* ]] && continue
 
-    if [ "$MODEL_TYPE" = "yolo" ]; then
-        YOLO_MODEL="$MODEL_NAME"
-    elif [ "$MODEL_TYPE" = "omz" ]; then
-        OMZ_MODELS+=("$MODEL_NAME")
+    if [ "$model_type" = "yolo" ]; then
+        YOLO_MODEL="$model_name"
+    elif [ "$model_type" = "omz" ]; then
+        OMZ_MODELS+=("$model_name")
     fi
 done < "$MODEL_TXT"
+
 
 echo "Found YOLO model: $YOLO_MODEL"
 echo "Found OMZ models: ${OMZ_MODELS[@]}"

@@ -1,21 +1,20 @@
 #!/bin/bash
-
-curl http://localhost:8080/pipelines/user_defined_pipelines/car_plate_recognition_1 -X POST -H 'Content-Type: application/json' -d ' 
+curl http://localhost:8080/pipelines/user_defined_pipelines/object_tracking_1 -X POST -H 'Content-Type: application/json' -d '
 {
     "source": {
-        "uri": "file:///home/pipeline-server/videos/cars_extended.mp4", 
+        "uri": "file:///home/pipeline-server/videos/VIRAT_S_000101.mp4",
         "type": "uri"
     },
     "destination": {
         "metadata": {
             "type": "mqtt",
-            "host": "192.168.131.98:1883", 
-            "topic": "object_detection_1",
+            "host": "10.3.233.175:1883",
+            "topic": "object_tracking_1",
             "timeout": 1000
         },
         "frame": {
             "type": "webrtc",
-            "peer-id": "object_detection_1"
+            "peer-id": "object_tracking_1"
         }
     },
     "parameters": {
@@ -23,22 +22,22 @@ curl http://localhost:8080/pipelines/user_defined_pipelines/car_plate_recognitio
     }
 }'
 
-curl http://localhost:8080/pipelines/user_defined_pipelines/car_plate_recognition_2 -X POST -H 'Content-Type: application/json' -d ' 
+curl http://localhost:8080/pipelines/user_defined_pipelines/object_tracking_2 -X POST -H 'Content-Type: application/json' -d '
 {
     "source": {
-        "uri": "file:///home/pipeline-server/videos/cars_extended.mp4", 
+        "uri": "file:///home/pipeline-server/videos/VIRAT_S_000102.mp4",
         "type": "uri"
     },
     "destination": {
         "metadata": {
             "type": "mqtt",
-            "host": "192.168.131.98:1883", 
-            "topic": "object_detection_2",
+            "host": "10.3.233.175:1883",
+            "topic": "object_tracking_2",
             "timeout": 1000
         },
         "frame": {
             "type": "webrtc",
-            "peer-id": "object_detection_2"
+            "peer-id": "object_tracking_2"
         }
     },
     "parameters": {
@@ -46,22 +45,22 @@ curl http://localhost:8080/pipelines/user_defined_pipelines/car_plate_recognitio
     }
 }'
 
-curl http://localhost:8080/pipelines/user_defined_pipelines/car_plate_recognition_3 -X POST -H 'Content-Type: application/json' -d ' 
+curl http://localhost:8080/pipelines/user_defined_pipelines/object_tracking_3 -X POST -H 'Content-Type: application/json' -d '
 {
     "source": {
-        "uri": "file:///home/pipeline-server/videos/cars_extended.mp4", 
+        "uri": "file:///home/pipeline-server/videos/VIRAT_S_000103.mp4",
         "type": "uri"
     },
     "destination": {
         "metadata": {
             "type": "mqtt",
-            "host": "192.168.131.98:1883", 
-            "topic": "object_detection_3",
+            "host": "10.3.233.175:1883",
+            "topic": "object_tracking_3",
             "timeout": 1000
         },
         "frame": {
             "type": "webrtc",
-            "peer-id": "object_detection_3"
+            "peer-id": "object_tracking_3"
         }
     },
     "parameters": {
@@ -69,114 +68,22 @@ curl http://localhost:8080/pipelines/user_defined_pipelines/car_plate_recognitio
     }
 }'
 
-curl http://localhost:8080/pipelines/user_defined_pipelines/car_plate_recognition_4 -X POST -H 'Content-Type: application/json' -d ' 
+curl http://localhost:8080/pipelines/user_defined_pipelines/object_tracking_4 -X POST -H 'Content-Type: application/json' -d '
 {
     "source": {
-        "uri": "file:///home/pipeline-server/videos/cars_extended.mp4", 
+        "uri": "file:///home/pipeline-server/videos/VIRAT_S_000104.mp4",
         "type": "uri"
     },
     "destination": {
         "metadata": {
             "type": "mqtt",
-            "host": "192.168.131.98:1883", 
-            "topic": "object_detection_4",
+            "host": "10.3.233.175:1883",
+            "topic": "object_tracking_4",
             "timeout": 1000
         },
         "frame": {
             "type": "webrtc",
-            "peer-id": "object_detection_4"
-        }
-    },
-    "parameters": {
-        "detection-device": "CPU"
-    }
-}'
-
-curl http://localhost:8080/pipelines/user_defined_pipelines/car_plate_recognition_5 -X POST -H 'Content-Type: application/json' -d ' 
-{
-    "source": {
-        "uri": "file:///home/pipeline-server/videos/cars_extended.mp4", 
-        "type": "uri"
-    },
-    "destination": {
-        "metadata": {
-            "type": "mqtt",
-            "host": "192.168.131.98:1883", 
-            "topic": "object_detection_5",
-            "timeout": 1000
-        },
-        "frame": {
-            "type": "webrtc",
-            "peer-id": "object_detection_5"
-        }
-    },
-    "parameters": {
-        "detection-device": "CPU"
-    }
-}'
-
-curl http://localhost:8080/pipelines/user_defined_pipelines/car_plate_recognition_6 -X POST -H 'Content-Type: application/json' -d ' 
-{
-    "source": {
-        "uri": "file:///home/pipeline-server/videos/cars_extended.mp4", 
-        "type": "uri"
-    },
-    "destination": {
-        "metadata": {
-            "type": "mqtt",
-            "host": "192.168.131.98:1883", 
-            "topic": "object_detection_6",
-            "timeout": 1000
-        },
-        "frame": {
-            "type": "webrtc",
-            "peer-id": "object_detection_6"
-        }
-    },
-    "parameters": {
-        "detection-device": "CPU"
-    }
-}'
-
-curl http://localhost:8080/pipelines/user_defined_pipelines/car_plate_recognition_7 -X POST -H 'Content-Type: application/json' -d ' 
-{
-    "source": {
-        "uri": "file:///home/pipeline-server/videos/cars_extended.mp4", 
-        "type": "uri"
-    },
-    "destination": {
-        "metadata": {
-            "type": "mqtt",
-            "host": "192.168.131.98:1883", 
-            "topic": "object_detection_7",
-            "timeout": 1000
-        },
-        "frame": {
-            "type": "webrtc",
-            "peer-id": "object_detection_7"
-        }
-    },
-    "parameters": {
-        "detection-device": "CPU"
-    }
-}'
-
-curl http://localhost:8080/pipelines/user_defined_pipelines/car_plate_recognition_8 -X POST -H 'Content-Type: application/json' -d ' 
-{
-    "source": {
-        "uri": "file:///home/pipeline-server/videos/cars_extended.mp4", 
-        "type": "uri"
-    },
-    "destination": {
-        "metadata": {
-            "type": "mqtt",
-            "host": "192.168.131.98:1883", 
-            "topic": "object_detection_8",
-            "timeout": 1000
-        },
-        "frame": {
-            "type": "webrtc",
-            "peer-id": "object_detection_8"
+            "peer-id": "object_tracking_4"
         }
     },
     "parameters": {
