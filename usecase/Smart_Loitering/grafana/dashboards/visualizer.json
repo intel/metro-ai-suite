@@ -56,15 +56,21 @@
         "y": 1
       },
       "id": 13,
+      "links": [
+        {
+          "title": "Details",
+          "url": "http://10.3.233.160:3000/d/be2er9dbe8a9sd/zone-1?orgId=1"
+        }
+      ],
       "options": {
-        "mqttLink": "ws://10.3.233.175:9001/mqtt",
+        "mqttLink": "ws://10.3.233.160:9001/mqtt",
         "mqttTopic": "loiter_status_1",
         "regionPosition": [
           "[{\"name\": \"Region 1_1\"}, {\"x\": 0, \"y\": 450}, {\"x\": 300, \"y\": 350}, {\"x\": 320, \"y\": 600}, {\"x\": 0, \"y\": 730}]"
         ],
         "videoHeight": 1080,
         "videoWidth": 1920,
-        "webrtcUrl": "http://10.3.233.175:8082/?destination_peer_id=object_tracking_1"
+        "webrtcUrl": "http://10.3.233.160:8082/?destination_peer_id=object_tracking_1"
       },
       "pluginVersion": "1.0.0",
       "targets": [
@@ -103,15 +109,21 @@
         "y": 1
       },
       "id": 14,
+      "links": [
+        {
+          "title": "Details",
+          "url": "http://10.3.233.160:3000/d/aecxdm402t1q8a/zone-2?orgId=1"
+        }
+      ],
       "options": {
-        "mqttLink": "ws://10.3.233.175:9001/mqtt",
+        "mqttLink": "ws://10.3.233.160:9001/mqtt",
         "mqttTopic": "loiter_status_2",
         "regionPosition": [
           "[{\"name\": \"Region 2_1\"}, {\"x\": 0, \"y\": 450}, {\"x\": 300, \"y\": 350}, {\"x\": 320, \"y\": 600}, {\"x\": 0, \"y\": 730}]"
         ],
         "videoHeight": 1080,
         "videoWidth": 1920,
-        "webrtcUrl": "http://10.3.233.175:8082/?destination_peer_id=object_tracking_2"
+        "webrtcUrl": "http://10.3.233.160:8082/?destination_peer_id=object_tracking_2"
       },
       "pluginVersion": "1.0.0",
       "targets": [
@@ -150,15 +162,21 @@
         "y": 13
       },
       "id": 15,
+      "links": [
+        {
+          "title": "Details",
+          "url": "http://10.3.233.160:3000/d/cecxe4agf3caoe/zone-3?orgId=1"
+        }
+      ],
       "options": {
-        "mqttLink": "ws://10.3.233.175:9001/mqtt",
+        "mqttLink": "ws://10.3.233.160:9001/mqtt",
         "mqttTopic": "loiter_status_3",
         "regionPosition": [
           "[{\"name\": \"Region 3_1\"}, {\"x\": 0, \"y\": 450}, {\"x\": 300, \"y\": 350}, {\"x\": 320, \"y\": 600}, {\"x\": 0, \"y\": 730}]"
         ],
         "videoHeight": 1080,
         "videoWidth": 1920,
-        "webrtcUrl": "http://10.3.233.175:8082/?destination_peer_id=object_tracking_3"
+        "webrtcUrl": "http://10.3.233.160:8082/?destination_peer_id=object_tracking_3"
       },
       "pluginVersion": "1.0.0",
       "targets": [
@@ -197,15 +215,21 @@
         "y": 13
       },
       "id": 16,
+      "links": [
+        {
+          "title": "Details",
+          "url": "http://10.3.233.160:3000/d/fecxe786edr0ge/zone-4?orgId=1"
+        }
+      ],
       "options": {
-        "mqttLink": "ws://10.3.233.175:9001/mqtt",
+        "mqttLink": "ws://10.3.233.160:9001/mqtt",
         "mqttTopic": "loiter_status_4",
         "regionPosition": [
           "[{\"name\": \"Region 4_1\"}, {\"x\": 0, \"y\": 450}, {\"x\": 300, \"y\": 350}, {\"x\": 320, \"y\": 600}, {\"x\": 0, \"y\": 730}]"
         ],
         "videoHeight": 1080,
         "videoWidth": 1920,
-        "webrtcUrl": "http://10.3.233.175:8082/?destination_peer_id=object_tracking_4"
+        "webrtcUrl": "http://10.3.233.160:8082/?destination_peer_id=object_tracking_4"
       },
       "pluginVersion": "1.0.0",
       "targets": [
