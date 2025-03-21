@@ -9,7 +9,7 @@ curl http://localhost:8080/pipelines/user_defined_pipelines/yolov10_1 -X POST -H
     "destination": {
         "metadata": {
             "type": "mqtt",
-            "host": "10.3.233.162:1883", 
+            "host": "0.0.0.0:1883", 
             "topic": "object_detection_1",
             "timeout": 1000
         },
@@ -32,7 +32,7 @@ curl http://localhost:8080/pipelines/user_defined_pipelines/yolov10_2 -X POST -H
     "destination": {
         "metadata": {
             "type": "mqtt",
-            "host": "10.3.233.162:1883", 
+            "host": "0.0.0.0:1883", 
             "topic": "object_detection_2",
             "timeout": 1000
         },
@@ -55,7 +55,7 @@ curl http://localhost:8080/pipelines/user_defined_pipelines/yolov10_3 -X POST -H
     "destination": {
         "metadata": {
             "type": "mqtt",
-            "host": "10.3.233.162:1883", 
+            "host": "0.0.0.0:1883", 
             "topic": "object_detection_3",
             "timeout": 1000
         },
@@ -78,7 +78,7 @@ curl http://localhost:8080/pipelines/user_defined_pipelines/yolov10_4 -X POST -H
     "destination": {
         "metadata": {
             "type": "mqtt",
-            "host": "10.3.233.162:1883", 
+            "host": "0.0.0.0:1883", 
             "topic": "object_detection_4",
             "timeout": 1000
         },
